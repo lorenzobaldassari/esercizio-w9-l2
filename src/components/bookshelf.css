@@ -24,13 +24,13 @@
   -webkit-box-orient: vertical;
 }
 
-.cardText {
-  /* height: 90px; */
+/* .cardText {
+  height: 90px;
 }
 
 .cardTitle {
-  /* height: 90px; */
-}
+  height: 90px;
+} */
 
 @media screen and (max-width: 576px) {
   .imgBox {
@@ -51,4 +51,9 @@
 #bar {
   z-index: 5;
   background-color: rgba(255, 255, 255, 0.7);
+}
+
+.redBorder {
+  /* border: 3px solid red; */
+  box-shadow: red 0px 0px 12px 12px;
 }

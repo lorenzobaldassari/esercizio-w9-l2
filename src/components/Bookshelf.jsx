@@ -10,12 +10,12 @@ import './bookshelf.css'
 import { Component } from 'react';
 
 
+let index=[]
 
 
 class Bookshelf extends Component  {
-  
   state={
-    tipo:fantasy
+    tipo:index
   }
   
   render(){
@@ -58,13 +58,13 @@ class Bookshelf extends Component  {
 
       <Card.Img variant="top" className='w-100 h-100' src={book.img} />
         </div>
-      <Card.Body className='d-flex flex-column justify-content-between'>
+      <Card.Body className='d-flex flex-column justify-content-between align-items-center'>
         <Card.Title className='cardTitle truncate-3'>{book.title}</Card.Title>
         <Card.Text className='cardText truncate-4'>
           Some quick example text to build on the card title and make up the
           bulk of the card's content.
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Button variant="success">BUY for {book.price} $</Button>
       </Card.Body>
 
       </Card>  

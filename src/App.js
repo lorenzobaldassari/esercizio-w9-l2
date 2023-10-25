@@ -4,13 +4,15 @@ import CustomNavbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Wellcome from "./components/Wellcome";
 import Library from "./components/Bookshelf";
+import Booklist from "./components/Booklist";
 
 function App() {
   return (
     <div id="app">
       <CustomNavbar />
       <Wellcome />
-      <Library />
+      {/* <Library /> */}
+      <Booklist />
       <Footer />
     </div>
   );

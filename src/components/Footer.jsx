@@ -2,7 +2,7 @@
 
 const Footer = ()=>{
 return(
-<div className="bg-secondary d-flex justify-content-center flex-column align-items-center position-fixed bottom-0  w-100">
+<div id="footer" className="bg-secondary d-flex justify-content-center flex-column align-items-center  w-100">
     <div className="pt-3">
         <span><link rel="stylesheet" href="#" />Home</span>
         <span><link rel="stylesheet" href="#" />About</span>
