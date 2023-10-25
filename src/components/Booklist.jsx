@@ -53,7 +53,7 @@ class Booklist extends Component{
                 })
                
             const a = this.state.original.filter(a=>{
-                return a.title === this.state.name
+                return a.title.toLowerCase().includes( this.state.name.toLowerCase())
             })
            
                 this.setState({
