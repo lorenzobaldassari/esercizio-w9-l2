@@ -7,10 +7,15 @@ import AddComment from "./AddComment";
 class CommentAera extends Component{
     
 
+    state=({
+        data:[]
+
+    })
+    
     
     getComment=()=>{
         
-        console.log(this.props.id,`ciao`)
+        
         fetch(`https://striveschool-api.herokuapp.com/api/comments/${this.props.id}`,{headers: {
             "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNmNhZWY2ZTNkZDAwMTQ5NWU0NzMiLCJpYXQiOjE2OTgzMjc3MjYsImV4cCI6MTY5OTUzNzMyNn0.tiIIVH3G0CZxJMnN5wdW_wBXmeiHiRSF4i4GjMz16jA"
             }}
@@ -23,21 +28,19 @@ class CommentAera extends Component{
             }
         })
         .then((data)=>{
-            console.log(`dati recuperati`, data)
+            console.log(`dati recuperati array commenti`, data)
             this.setState({
-                reservation:data,
-                loading:false
+                data:data,
+               
             })
         })
         .catch(error=>{
             console.log(`ERROR`,error)
-            this.setState({
-                loading:false
-            })
+           
         })}
         componentDidMount(){
         
-            this.getComment()
+            // this.getComment()
         }
 
     
@@ -45,12 +48,14 @@ class CommentAera extends Component{
         return(
             <div>
                 {/* <CommentList/> */}
-                <AddComment  Id={this.props.id}/>
+                <AddComment  Id={this.props.id} />
                 {
-                    console.log(this.props.id)
+                    console.log(this.props.id,`e quiii`)
                 }
                 <h2>ciaociao</h2>
-                <CommentList Id={this.props.ala}/>
+                
+                <CommentList Id={this.props.id} array={this.state.data}/>
+                
             </div>
         )
     }

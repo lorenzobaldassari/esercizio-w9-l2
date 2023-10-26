@@ -1,83 +1,93 @@
-import { Component } from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Component } from 'react'
+import { Button, Form } from 'react-bootstrap'
 
+class AddComment extends Component {
+  state = {
+    comment: {
+      comment: 'ciao',
+      rate: `2`,
+      elementId: this.props.Id,
+    },
+  }
 
-
-class AddComment extends Component{
-    state={
-        
-        
-        comment: ``,
-        rate: ``,
-        elementId: ``,
-        
-        
-    }
-    
-
-    handleInputChange=(property,value)=>{
+  sendComment = async (e) => {
+    e.preventDefault()
+    try {
+      let response = await fetch("https://striveschool-api.herokuapp.com/api/comments/",
+        {
+          method: "POST",
+          body: JSON.stringify(this.state.comment),
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhOWM5ZmY2ZTNkZDAwMTQ5NWU1ZGYiLCJpYXQiOjE2OTgzMzk5OTksImV4cCI6MTY5OTU0OTU5OX0.gwIIoGT9mPP0rY1ydq5GzBjs_5BJTceiMVSoCpr8NlM",
+          },
+        }
+      )
+      if (response.ok) {
+        alert('Recensione inviata!')
         this.setState({
-            
-                elementId:58915351,
-                
-                [property]:value    
-                
-            })}
-
-
-                 
-            handleFormSubmit=(e)=>{
-                const obj={
-                    comment:`ciao`,
-                    rate:`miao`,
-                    elementId:`ciao`
-                }
-                e.preventDefault();
-                fetch(`https://striveschool-api.herokuapp.com/api/comments/`,
-                {
-                    method:'POST',
-                    body: JSON.stringify(obj),
-                    headers:{
-                        Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNmNhZWY2ZTNkZDAwMTQ5NWU0NzMiLCJpYXQiOjE2OTgzMjc3MjYsImV4cCI6MTY5OTUzNzMyNn0.tiIIVH3G0CZxJMnN5wdW_wBXmeiHiRSF4i4GjMz16jA",
-                        "content-type":"application/json",
-                    },    
-                })
-                .then ((res)=>{
-                    console.log(`RESPONSE`,res)
-                    if (res.ok){
-                        alert(`prenotazione salvata`)
-                    }
-                    else{
-                        throw new Error(`c'e stato un errore nel savataggio`)
-                    }
-                })  
-                .catch((err)=>{
-                    console.log(`errore!`, err)
-                })
-              }   
-
-    render(){
-        return (
-            <Form onSubmit={this.handleFormSubmit}>
-                
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>comment</Form.Label>
-                    <Form.Control onChange={(e)=>this.handleInputChange('comment',e.target.value)} as="textarea" rows={3} />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>rate</Form.Label>
-                    <Form.Control type="text"  onChange={(e)=>this.handleInputChange('rate',e.target.value)} />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
-        )
+          comment: {
+            comment: '',
+            rate: 1,
+            elementId: this.props.Id,
+          },
+        })
+      } else {
+        throw new Error('Qualcosa è andato storto')
+      }
+    } catch (error) {
+      alert(error)
     }
+  }
+
+  render() {
+    return (
+      <div className="my-3">
+        <Form onSubmit={this.sendComment}>
+          <Form.Group className="mb-2">
+            <Form.Label>Recensione</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Inserisci qui il testo"
+              value={this.state.comment.comment}
+              onChange={(e) =>
+                this.setState({
+                  comment: {
+                    ...this.state.comment,
+                    comment: e.target.value,
+                  },
+                })
+              }
+            />
+          </Form.Group>
+          <Form.Group className="mb-2">
+            <Form.Label>Valutazione</Form.Label>
+            <Form.Control
+              as="select"
+              value={this.state.comment.rate}
+              onChange={(e) =>
+                this.setState({
+                  comment: {
+                    ...this.state.comment,
+                    rate: e.target.value,
+                  },
+                })
+              }
+            >
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </Form.Control>
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Invia
+          </Button>
+        </Form>
+      </div>
+    )
+  }
 }
-
-
-
 
 export default AddComment

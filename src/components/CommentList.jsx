@@ -13,8 +13,8 @@ class CommentList extends Component{
 
     getComment=()=>{
         
-        console.log(this.props.ala)
-        fetch(`https://striveschool-api.herokuapp.com/api/comments/${this.props.id}`,{headers: {
+        console.log(this.props.Id,`ciaow22`)
+        fetch(`https://striveschool-api.herokuapp.com/api/comments/${this.props.Id}`,{headers: {
             "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNmNhZWY2ZTNkZDAwMTQ5NWU0NzMiLCJpYXQiOjE2OTgzMjc3MjYsImV4cCI6MTY5OTUzNzMyNn0.tiIIVH3G0CZxJMnN5wdW_wBXmeiHiRSF4i4GjMz16jA"
             }}
        )
@@ -26,7 +26,7 @@ class CommentList extends Component{
             }
         })
         .then((data)=>{
-            console.log(`dati recuperati`, data)
+            console.log(`dati recuperati dddddddddd`, data)
             this.setState({
                 reservation:data,
                 loading:false
@@ -43,16 +43,19 @@ class CommentList extends Component{
             this.getComment()
         }
 
+
     render(){
        
         return(
-
-            <ListGroup>
-                {
-                
-                <ListGroup.Item>Cras justo odio</ListGroup.Item>         
-                }
-            </ListGroup>
+<h2>ciao</h2>
+            // <ListGroup>
+            //     {
+            //         this.props.array.map((comment)=>{
+                        
+            //            return <ListGroup.Item>{comment}</ListGroup.Item>         
+            //         })
+            //     }
+            // </ListGroup>
         )
     }
 }
