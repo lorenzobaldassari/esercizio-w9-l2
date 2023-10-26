@@ -82,7 +82,7 @@ class Booklist extends Component{
                     <div className="me-3">
                     <Form.Group className="mb-3">
                          
-                        <Form.Control  placeholder="Creca" onChange={(e)=>this.handleInputChange(e.target.value)} />
+                        <Form.Control  placeholder="Creca"  onChange={(e)=>this.handleInputChange(e.target.value)} />
                      </Form.Group>
                     </div>
                 <div>
@@ -101,8 +101,8 @@ class Booklist extends Component{
         </div>
                 <Row className="g-4">
                     {
-                        this.state.tipo.map((book,i)=>{
-                            return (<SingleBook key={i} img={book.img} title={book.title} price={book.price}
+                        this.state.tipo.slice(-4).map((book,i)=>{
+                            return (<SingleBook key={book.asin} asin={parseInt(book.asin)}  img={book.img} title={book.title} price={book.price}
                                 />
                                 )
                                 
