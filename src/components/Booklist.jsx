@@ -1,6 +1,6 @@
 import { Component } from "react";
 import  SingleBook from './SingleBook'
-import {Row,Container } from 'react-bootstrap';
+import {Col,Row,Container } from 'react-bootstrap';
 import fantasy from '../books/fantasy.json'
 import Button from 'react-bootstrap/Button';
 import history from '../books/history.json'
@@ -8,6 +8,8 @@ import horror from '../books/horror.json'
 import romance from '../books/romance.json'
 import scifi from '../books/scifi.json'
 import Form from 'react-bootstrap/Form';
+import CommentAera from "./CommentArea";
+
 let index=[]
 
 
@@ -65,8 +67,23 @@ class Booklist extends Component{
           handleInputChange=(value)=>{
               this.setState({                  
                       ...this.state,
-                      name:value    
+                      name: value    
                   })}
+
+        changeTheState =  (elem)=>{
+            this.setState({
+              elementId: elem
+                  })}
+                  
+
+                //   componentDidUpdate(prevProps,prevState){
+                //     if(prevProps.id !== this.props.id){
+                //         this.setState({
+
+                //         })
+                //     }
+                // }
+
     render(){
 
 
@@ -77,6 +94,9 @@ class Booklist extends Component{
           
         return(
             <Container fluid>
+                <Row>
+                    <Col className="col-6">
+
                 <div className="d-flex justify-content-center">
                 <Form className="d-flex justify-content-center" onSubmit={this.search}>
                     <div className="me-3">
@@ -102,7 +122,9 @@ class Booklist extends Component{
                 <Row className="g-4">
                     {
                         this.state.tipo.slice(-4).map((book,i)=>{
-                            return (<SingleBook key={book.asin} asin={parseInt(book.asin)}  img={book.img} title={book.title} price={book.price}
+                            return (<SingleBook
+                                 changeTheState={this.changeTheState}
+                                 key={book.asin} asin={parseInt(book.asin)}  img={book.img} title={book.title} price={book.price}
                                 />
                                 )
                                 
@@ -110,6 +132,11 @@ class Booklist extends Component{
                         
                     }
                     
+                </Row>
+                    </Col>
+                    <Col className="col-6">
+                        <CommentAera id={this.state.elementId || `niente`} />
+                    </Col>
                 </Row>
             </Container>
         )

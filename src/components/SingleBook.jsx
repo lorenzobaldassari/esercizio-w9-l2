@@ -1,9 +1,9 @@
 import { Component } from 'react';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { Col,Row,Container } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import fantasy from '../books/fantasy.json'
-import CommentArea from './CommentArea.jsx'
+
 
 
 console.log(fantasy)
@@ -18,25 +18,36 @@ class SingleBook extends Component{
         if(this.state.selected===false){
         this.setState({
             selected:true
-           })}else{
+            
+           })
+           this.props.changeTheState(this.props.asin)}else{
             this.setState({
                 selected:false
-            })}}
+            })
+            this.props.changeTheState("")    
+        }}
     
-         
+       
 
-    render()
-    {
-
+            // componentDidUpdate(prevProps){
+            //     if(prevProps.asin !== this.props.asin){
+            //         this.props.changeTheState(this.props.asin)
+            //     }
+            // }
+            
+            
+            render()
+            {
+    
            
 
         return(
             <Col  sm={6} md={4} lg={3} xxl={2} className='colXs'>
                 
-            <Card onClick={this.activate}  className={this.state.selected===true ? 'redBorder cardBox' : ' cardBox'}>
+            <Card  className={this.state.selected===true ? 'redBorder cardBox' : ' cardBox'}>
                   <div className='imgBox w-100 d-flex justify-content-center align-items-center'>
       
-                    <Card.Img variant="top" className='w-100 h-100' src={this.props.img} />
+                    <Card.Img onClick={this.activate}  variant="top" className='w-100 h-100' src={this.props.img} />
                   </div>
                   <Card.Body className='d-flex flex-column justify-content-between align-items-center'>
                     <Card.Title className='cardTitle truncate-3'>{this.props.title}</Card.Title>
@@ -44,8 +55,8 @@ class SingleBook extends Component{
                         Some quick example text to build on the card title and make up the
                         bulk of the card's content.
                    </Card.Text>
-                   <Button variant="success">BUY for {this.props.price} $</Button>
-                   <CommentArea id={this.props.asin}/>
+                   {/* <Button variant="success">BUY for {this.props.price} $</Button> */}
+                   {/* <CommentArea  id={this.state.elementId}/> */}
                  </Card.Body>
             </Card>  
                 </Col>

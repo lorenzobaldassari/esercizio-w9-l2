@@ -8,16 +8,18 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 class CommentList extends Component{
     state={
+reservation:[],
 
     }
 
+    
     getComment=()=>{
         
         console.log(this.props.Id,`ciaow22`)
         fetch(`https://striveschool-api.herokuapp.com/api/comments/${this.props.Id}`,{headers: {
             "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNmNhZWY2ZTNkZDAwMTQ5NWU0NzMiLCJpYXQiOjE2OTgzMjc3MjYsImV4cCI6MTY5OTUzNzMyNn0.tiIIVH3G0CZxJMnN5wdW_wBXmeiHiRSF4i4GjMz16jA"
-            }}
-       )
+        }}
+        )
         .then((response)=>{
             if(response.ok){
                 return  response.json()
@@ -38,24 +40,32 @@ class CommentList extends Component{
                 loading:false
             })
         })}
-        componentDidMount(){
-        
-            this.getComment()
-        }
+        componentDidUpdate(prevProps,prevState){
+           
+            if(prevProps.Id !== this.props.Id){
 
+                this.getComment()}}
+            
+            
+           
+            
+            
+         
 
     render(){
        
         return(
-<h2>ciao</h2>
-            // <ListGroup>
-            //     {
-            //         this.props.array.map((comment)=>{
+            
+            <ListGroup >
+                
+                
+                {   
+                    this.state.reservation.map((comment,i)=>{
                         
-            //            return <ListGroup.Item>{comment}</ListGroup.Item>         
-            //         })
-            //     }
-            // </ListGroup>
+                       return <ListGroup.Item className="bg-info" key={i+1}>{i+1} - {comment.comment} {comment.rate}</ListGroup.Item>         
+                    })
+                }
+            </ListGroup>
         )
     }
 }

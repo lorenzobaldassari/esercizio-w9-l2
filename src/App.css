@@ -5,8 +5,12 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
 }
 
 #footer{
     margin-top: auto;
+}
+.bg-none{
+  background:none !important;
 }
