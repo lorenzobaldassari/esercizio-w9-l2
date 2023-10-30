@@ -70,9 +70,10 @@ class Booklist extends Component{
                       name: value    
                   })}
 
-        changeTheState =  (elem)=>{
+        changeTheState =  (elem,selected)=>{
             this.setState({
-              elementId: elem
+              elementId: elem,
+              selected:selected
                   })}
                   
 
@@ -95,7 +96,7 @@ class Booklist extends Component{
         return(
             <Container fluid>
                 <Row>
-                    <Col className="col-6">
+                    <Col className="col-8">
 
                 <div className="d-flex justify-content-center">
                 <Form className="d-flex justify-content-center" onSubmit={this.search}>
@@ -124,7 +125,7 @@ class Booklist extends Component{
                         this.state.tipo.slice(-4).map((book,i)=>{
                             return (<SingleBook
                                  changeTheState={this.changeTheState}
-                                 key={book.asin} asin={parseInt(book.asin)}  img={book.img} title={book.title} price={book.price}
+                                 key={book.asin} selected={false} i={i} asin={parseInt(book.asin)} elementId={this.state.elementId}  img={book.img} title={book.title} price={book.price}
                                 />
                                 )
                                 
@@ -134,7 +135,7 @@ class Booklist extends Component{
                     
                 </Row>
                     </Col>
-                    <Col className="col-6">
+                    <Col className="col-4">
                         <CommentAera id={this.state.elementId || `niente`} />
                     </Col>
                 </Row>

@@ -8,13 +8,20 @@ import fantasy from '../books/fantasy.json'
 
 console.log(fantasy)
 class SingleBook extends Component{
-
+    
     state={
         selected:false
     }
+    // erase=()=>{
+    //     this.setState({
+    //         selected:false
+    //     })
+    // }
+   
 
     
         activate =()=>{
+            this.activate2()
         if(this.state.selected===false){
         this.setState({
             selected:true
@@ -23,11 +30,21 @@ class SingleBook extends Component{
            this.props.changeTheState(this.props.asin)}else{
             this.setState({
                 selected:false
-            })
-            this.props.changeTheState("")    
+                   })
+                   this.props.changeTheState("")    
         }}
     
-       
+       activate2=()=>{
+     const array1= document.getElementsByClassName('redBorder')
+     const array =Array.from(array1);
+     for(let i=0;i<array.length;i++){
+        array[i].classList.remove(`redBorder`)
+        this.setState({
+            selected:false
+               })
+
+     }
+       }
 
             // componentDidUpdate(prevProps){
             //     if(prevProps.asin !== this.props.asin){
@@ -42,7 +59,8 @@ class SingleBook extends Component{
            
 
         return(
-            <Col  sm={6} md={4} lg={3} xxl={2} className='colXs'>
+            
+            <Col  sm={6} md={4} lg={3} xxl={3} className='colXs'>
                 
             <Card  className={this.state.selected===true ? 'redBorder cardBox' : ' cardBox'}>
                   <div className='imgBox w-100 d-flex justify-content-center align-items-center'>
